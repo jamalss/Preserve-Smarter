@@ -77,7 +77,6 @@ a:focus-visible, button:focus-visible, input:focus-visible{
   border-bottom:1px solid var(--sage-line);
 }
 .site-nav .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
-.brand{font-family:var(--f-display); font-weight:600; font-size:1.25rem; color:var(--ink); display:flex; align-items:center; gap:8px;}
 .brand .mark{width:26px; height:26px; display:inline-block; flex-shrink:0;}
 .nav-links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
 .nav-links a{font-size:.95rem; font-weight:500; color:var(--ink-soft);}
@@ -284,8 +283,36 @@ footer{border-top:1px solid var(--sage-line); padding:48px 0 28px;}
 .related-card h4{font-size:1rem; margin:6px 0 0; color:var(--ink); font-weight:600;}
 @media (max-width:600px){.related-grid{grid-template-columns:1fr;}}
 
-/* ---- Logo image (replaces inline SVG mark) ---- */
-.logo-img{height:30px; width:auto; display:block;}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+}
+.logo-img{
+  width:42px;
+  height:42px;
+  flex-shrink:0;
+  display:block;
+}
+.logo-text{
+  display:flex;
+  align-items:baseline;
+  gap:.35rem;
+  font-family:'Fraunces',serif;
+  font-size:1.45rem;
+  font-weight:600;
+  line-height:1;
+}
+.logo-text .preserve{
+  color:#2A5C69;
+}
+.logo-text .smarter{
+  color:#C97D2E;
+}
+/* Footer uses the same brand markup at a smaller size */
+footer .logo-img{width:34px; height:34px;}
+footer .logo-text{font-size:1.2rem;}
 
 /* ---- Comparison cards (method-by-method, replaces raw table) ---- */
 .comparison-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:28px 0 8px;}
