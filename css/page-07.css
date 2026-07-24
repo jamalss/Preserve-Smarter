@@ -1,0 +1,23 @@
+/* Page 07 — Payback Calculator (unique to this page, not part of base.css) */
+.calculator-card{
+  background:var(--white); border:1px solid var(--sage-line); border-radius:var(--radius);
+  padding:30px 28px; margin:28px 0; box-shadow:var(--shadow-soft);
+}
+.calculator-card h3{margin:0 0 22px; font-size:1.15rem; font-family:var(--f-ui); font-weight:700;}
+.calc-row{margin-bottom:22px;}
+.calc-row label{display:block; font-family:var(--f-ui); font-size:.9rem; font-weight:600; color:var(--ink-soft); margin-bottom:8px;}
+.calc-row-inline{display:flex; align-items:center; gap:14px;}
+.calc-row-inline input[type="range"]{flex:1; accent-color:var(--vacuum-deep);}
+.calc-row-inline .calc-value{font-family:var(--f-data); font-weight:700; font-size:1.1rem; color:var(--vacuum-deep); min-width:56px; text-align:right;}
+.calc-row select{
+  width:100%; padding:11px 14px; border-radius:var(--radius-sm); border:1px solid var(--sage-line);
+  background:var(--frost); color:var(--ink); font-family:var(--f-ui); font-size:.95rem;
+}
+.calc-result{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:linear-gradient(135deg, var(--vacuum-deep), var(--vacuum)); color:#fff;
+  border-radius:var(--radius-sm); padding:20px 22px; margin-top:6px; flex-wrap:wrap;
+}
+.calc-result-label{font-family:var(--f-ui); font-size:.9rem; font-weight:600;}
+.calc-result-value{font-size:1.6rem; font-weight:700;}
+.calc-note{font-size:.82rem; color:var(--sage); margin-top:12px;}
