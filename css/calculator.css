@@ -1,0 +1,42 @@
+/* Payback calculator — used only by freeze-dryer-payback-calculator.html
+   (replaces the old css/page-07.css — delete that file from the repo) */
+.calculator-card{
+  background:var(--white); border:1px solid var(--sage-line); border-radius:var(--radius);
+  padding:28px 26px; margin:28px 0; box-shadow:var(--shadow-soft);
+}
+.calculator-card h3{margin:0 0 6px; font-size:1.15rem; font-family:var(--f-ui); font-weight:600; display:flex; align-items:center; gap:8px;}
+.calculator-card .calc-intro, .article-body .calc-intro{font-family:var(--f-ui); font-size:.9rem; color:var(--ink-soft); margin:0 0 22px;}
+.calc-row{margin-bottom:22px;}
+.calc-row label{display:block; font-family:var(--f-ui); font-size:.92rem; font-weight:600; color:var(--ink); margin-bottom:6px;}
+.calc-hint{display:block; font-family:var(--f-ui); font-size:.82rem; color:var(--sage); margin:-2px 0 8px; font-weight:400;}
+.calc-row-inline{display:flex; align-items:center; gap:14px;}
+.calc-row-inline input[type="range"]{flex:1; min-width:0; accent-color:var(--brand-teal); height:28px;}
+[data-theme="dark"] .calc-row-inline input[type="range"]{accent-color:var(--vacuum);}
+.calc-value{font-family:var(--f-data); font-weight:600; font-size:1.1rem; color:var(--vacuum-deep); min-width:64px; text-align:right;}
+.calc-row select, .calc-row input[type="number"]{
+  width:100%; min-height:46px; padding:10px 14px; border-radius:var(--radius-sm);
+  border:1px solid var(--sage); background:var(--frost); color:var(--ink);
+  font-family:var(--f-ui); font-size:1rem;
+}
+.calc-pair{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+@media (max-width:480px){.calc-pair{grid-template-columns:1fr;} .calculator-card{padding:22px 18px;}}
+.calc-money{position:relative;}
+.calc-money::before{content:"$"; position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--ink-soft); font-family:var(--f-ui); pointer-events:none;}
+.calc-money input[type="number"]{padding-left:28px;}
+.calc-error, .article-body .calc-error{font-family:var(--f-ui); font-size:.85rem; color:#B3261E; margin:6px 0 0;}
+[data-theme="dark"] .calc-error{color:#F2A49B;}
+.calc-error[hidden]{display:none;}
+
+/* results — fixed brand colours so white text stays 4.8:1+ in both themes */
+.calc-results{
+  background:linear-gradient(135deg, var(--brand-teal), var(--brand-teal-2)); color:var(--on-brand);
+  border-radius:var(--radius-sm); padding:20px 22px; margin-top:6px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+}
+.calc-results div{display:flex; flex-direction:column; gap:4px;}
+.calc-results dt{font-family:var(--f-ui); font-size:.82rem; font-weight:600; color:var(--on-brand); opacity:1;}
+.calc-results dd{margin:0; font-family:var(--f-data); font-size:1.35rem; font-weight:600; color:var(--on-brand);}
+.calc-results .calc-main dd{font-size:1.6rem;}
+@media (max-width:560px){.calc-results{grid-template-columns:1fr;}}
+.calc-verdict, .article-body .calc-verdict{font-family:var(--f-ui); font-size:.95rem; color:var(--ink); margin:14px 0 0; font-weight:600;}
+.calculator-card .note{margin:12px 0 0;}
