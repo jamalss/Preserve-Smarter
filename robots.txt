@@ -1,0 +1,9 @@
+# robots.txt — preservesmarter.com
+User-agent: *
+Allow: /
+
+# Block access to any admin or config paths if they exist
+Disallow: /admin/
+Disallow: /.env
+
+Sitemap: https://preservesmarter.com/sitemap.xml
