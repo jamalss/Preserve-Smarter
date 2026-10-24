@@ -1,239 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- 1. Encoding — always first -->
 <meta charset="UTF-8">
+<!-- 2. Viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 3. Content Security Policy — strict: no inline scripts or styles anywhere on this site.
+     form-action allows only Kit's subscribe endpoint. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action https://app.kit.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<!-- 4–6. Kept per build standard. NOTE: browsers only honour X-Content-Type-Options and
+     Permissions-Policy as real HTTP headers — these meta versions are ignored. The working
+     versions come from the Cloudflare Transform Rule (security.txt Section 11, step 10). -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
+
 <title>Preserve Smarter | Food Preservation &amp; Freeze Drying Guides</title>
 <meta name="description" content="Evidence-based guides on food preservation and freeze drying — how to waste less, save more, and understand which storage method actually works.">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="https://preservesmarter.com/">
+<meta name="theme-color" content="#035E6E">
 
+<!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Preserve Smarter | Food Preservation & Freeze Drying Guides">
+<meta property="og:site_name" content="Preserve Smarter">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Preserve Smarter | Food Preservation &amp; Freeze Drying Guides">
 <meta property="og:description" content="Evidence-based guides on food preservation and freeze drying — how to waste less, save more, and understand which storage method actually works.">
 <meta property="og:url" content="https://preservesmarter.com/">
+<meta property="og:image" content="https://preservesmarter.com/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preserve Smarter logo beside the line: Stop watching good food turn into wasted money.">
+<!-- Twitter / X (no twitter:site — no X account exists; never invent a handle) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Preserve Smarter | Food Preservation &amp; Freeze Drying Guides">
+<meta name="twitter:description" content="Evidence-based guides on food preservation and freeze drying — how to waste less, save more, and understand which storage method actually works.">
+<meta name="twitter:image" content="https://preservesmarter.com/images/og-image.jpg">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!-- Icons + manifest -->
+<link rel="icon" href="images/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- Theme set before first paint (no dark-mode flash). Must stay a normal, non-deferred script. -->
+<script src="js/theme-init.js"></script>
+
+<!-- Self-hosted fonts: preload the two used above the fold -->
+<link rel="preload" href="fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/base.css">
 
+<!-- Structured data (not executed, so CSP does not block it) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Preserve Smarter",
-  "url": "https://preservesmarter.com/",
-  "description": "Evidence-based guides on food preservation and freeze drying.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Preserve Smarter"
-  }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://preservesmarter.com/#organization",
+      "name": "Preserve Smarter",
+      "url": "https://preservesmarter.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://preservesmarter.com/images/android-chrome-512x512.png",
+        "width": 512,
+        "height": 512
+      },
+      "description": "Evidence-based guides on food preservation and freeze drying."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://preservesmarter.com/#website",
+      "name": "Preserve Smarter",
+      "url": "https://preservesmarter.com/",
+      "description": "Evidence-based guides on food preservation and freeze drying.",
+      "inLanguage": "en-US",
+      "publisher": { "@id": "https://preservesmarter.com/#organization" }
+    }
+  ]
 }
 </script>
-<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
-<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="container-xl nav-inner">
-    <a href="index.html" class="brand">
-      <img src="images/logo.svg" alt="Preserve Smarter" class="logo-img">
-      <span class="logo-text">
-        <span class="preserve">Preserve</span>
-        <span class="smarter">Smarter</span>
-      </span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="01-why-food-preservation-is-necessary.html">Why Preserve</a></li>
-      <li><a href="02-food-storage-methods-compared.html">Compare Methods</a></li>
-      <li><a href="03-what-is-freeze-drying.html">Freeze Drying</a></li>
-      <li><a href="05-best-freeze-dryers-for-home-use.html">Best Dryers</a></li>
-    </ul>
-    <div style="display:flex; align-items:center; gap:10px;">
-      <button class="theme-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><i class="bi bi-list"></i></button>
-    </div>
-  </div>
-</nav>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<header class="hero">
-  <div class="container-xl hero-inner">
-    <div class="eyebrow"><span class="dot"></span> Food Preservation, Explained Plainly</div>
-    <h1>Stop watching good food turn into wasted money.</h1>
-    <p class="lede">Clear, evidence-based guides on food preservation and freeze drying so you can decide, with real numbers, which method actually earns a place in your kitchen.</p>
-    <div class="hero-ctas">
-      <a href="01-why-food-preservation-is-necessary.html" class="btn btn-primary">Start Here <i class="bi bi-arrow-right"></i></a>
-      <a href="02-food-storage-methods-compared.html" class="btn btn-ghost">Compare Storage Methods</a>
+<header>
+  <nav class="site-nav" aria-label="Main">
+    <div class="container-xl nav-inner">
+      <a href="index.html" class="brand" aria-current="page">
+        <img src="images/logo.svg" class="logo-img logo-light" alt="" width="42" height="42">
+        <img src="images/logo-dark.svg" class="logo-img logo-dark" alt="" width="42" height="42">
+        <span class="logo-text"><span class="preserve">Preserve</span> <span class="smarter">Smarter</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="why-food-preservation-is-necessary.html">Why Preserve</a></li>
+        <li><a href="food-storage-methods-compared.html">Compare Methods</a></li>
+        <li><a href="what-is-freeze-drying.html">Freeze Drying</a></li>
+        <li><a href="best-home-freeze-dryers.html">Best Dryers</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button type="button" class="theme-toggle" aria-pressed="false" aria-label="Dark mode">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-moon-stars"></use></svg>
+        </button>
+        <button type="button" class="nav-toggle" aria-controls="navLinks" aria-expanded="false" aria-label="Open menu">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-list"></use></svg>
+        </button>
+      </div>
     </div>
-  </div>
+  </nav>
 </header>
 
-<section class="stat-strip">
-  <div class="container-xl stat-grid">
-    <div class="stat">
-      <span class="num font-data">~33%</span>
-      <span class="label">Of all food produced is wasted</span>
-    </div>
-    <div class="stat">
-      <span class="num font-data">98%</span>
-      <span class="label">Nutrition retained by freeze drying</span>
-    </div>
-    <div class="stat">
-      <span class="num font-data">25+ yrs</span>
-      <span class="label">Typical freeze-dried shelf life</span>
-    </div>
-  </div>
-</section>
+<main id="main-content">
 
-<section class="section">
-  <div class="container-xl">
-    <div class="section-head">
-      <div class="kicker">Start Here</div>
-      <h2>Read in this order</h2>
-      <p>Eight guides, built to answer one question at a time — from why food waste costs you more than you think, to whether a freeze dryer is worth the money.</p>
-    </div>
-
-    <div class="path-list">
-      <a href="01-why-food-preservation-is-necessary.html" class="path-card">
-        <div class="path-step" style="background:#2A5C69">1</div>
-        <div><h3>Why Food Preservation Is Necessary</h3><p>What food waste actually costs the average household each year.</p></div>
-        <i class="bi bi-arrow-right arrow"></i>
-      </a>
-      <a href="02-food-storage-methods-compared.html" class="path-card">
-        <div class="path-step" style="background:#326E79">2</div>
-        <div><h3>Food Storage Methods Compared</h3><p>Canning, freezing, dehydrating, and freeze drying, side by side.</p></div>
-        <i class="bi bi-arrow-right arrow"></i>
-      </a>
-      <a href="03-what-is-freeze-drying.html" class="path-card">
-        <div class="path-step" style="background:#3E7C8C">3</div>
-        <div><h3>What Is Freeze Drying?</h3><p>The science of sublimation, explained without the jargon.</p></div>
-        <i class="bi bi-arrow-right arrow"></i>
-      </a>
-      <a href="00-brief-history-of-freeze-drying.html" class="path-card">
-        <div class="path-step" style="background:#5C8073">4</div>
-        <div><h3>A Brief History of Freeze Drying</h3><p>From the Andes to NASA — how the process was discovered and refined.</p></div>
-        <i class="bi bi-arrow-right arrow"></i>
-      </a>
-      <a href="06-seven-common-food-storage-mistakes.html" class="path-card">
-        <div class="path-step" style="background:#8A7A55">5</div>
-        <div><h3>Seven Common Food Storage Mistakes</h3><p>The small errors that quietly spoil food faster than they should.</p></div>
-        <i class="bi bi-arrow-right arrow"></i>
-      </a>
-      <a href="04-is-a-freeze-dryer-worth-it.html" class="path-card">
-        <div class="path-step" style="background:#B27C3E">6</div>
-        <div><h3>Is a Freeze Dryer Worth It?</h3><p>Weighing the upfront cost against what you'd actually save.</p></div>
-        <i class="bi bi-arrow-right arrow"></i>
-      </a>
-      <a href="07-how-long-does-it-take-for-a-freeze-dryer-to-pay-for-itself.html" class="path-card">
-        <div class="path-step" style="background:#C97D2E">7</div>
-        <div><h3>How Long Until It Pays for Itself?</h3><p>A real payback calculation based on your household's habits.</p></div>
-        <i class="bi bi-arrow-right arrow"></i>
-      </a>
-      <a href="05-best-freeze-dryers-for-home-use.html" class="path-card">
-        <div class="path-step" style="background:#A8551F">8</div>
-        <div><h3>Best Freeze Dryers for Home Use</h3><p>Specific models compared, once you've decided it's worth it.</p></div>
-        <i class="bi bi-arrow-right arrow"></i>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="padding-top:0;">
-  <div class="container-xl">
-    <div class="section-head">
-      <div class="kicker">How This Guide Works</div>
-      <h2>Research-based, not lab-tested</h2>
-      <p>We don't yet own a home freeze dryer ourselves. Every guide here is built from manufacturer data, published research, and aggregated experience from long-time home users. Where a claim comes from someone's hands-on use rather than our own, we say so.</p>
-    </div>
-    <div class="trust-grid">
-      <div class="trust-card">
-        <i class="bi bi-journal-check"></i>
-        <h3>Sourced, not guessed</h3>
-        <p>Shelf-life and nutrition figures are drawn from published data, not marketing copy.</p>
-      </div>
-      <div class="trust-card">
-        <i class="bi bi-people"></i>
-        <h3>Owner experience, credited</h3>
-        <p>Real-use details come from home-user communities and are attributed, not passed off as our own.</p>
-      </div>
-      <div class="trust-card">
-        <i class="bi bi-cash-coin"></i>
-        <h3>Honest about incentives</h3>
-        <p>Some links on this site are affiliate links. See our disclosure in the footer.</p>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container-xl hero-inner">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Food Preservation, Explained Plainly</p>
+      <h1 id="hero-title">Stop watching good food turn into wasted money.</h1>
+      <p class="lede">Clear, evidence-based guides on food preservation and freeze drying so you can decide, with real numbers, which method actually earns a place in your kitchen.</p>
+      <div class="hero-ctas">
+        <a href="why-food-preservation-is-necessary.html" class="btn btn-primary">Start Here <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg></a>
+        <a href="food-storage-methods-compared.html" class="btn btn-ghost">Compare Storage Methods</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" style="padding-top:0;">
-  <div class="container-xl">
-    <div class="pillar">
-      <div class="kicker">The Pillar Guide</div>
-      <h2 style="margin-top:10px;">What is freeze drying, really?</h2>
-      <p style="max-width:520px; margin-bottom:26px;">The one guide that explains the whole process, and the hub every other article on this site links back to.</p>
-      <a href="03-what-is-freeze-drying.html" class="btn btn-primary">Read the Full Guide <i class="bi bi-arrow-right"></i></a>
+  <!-- Every figure here is sourced to the original publisher. Manufacturer claims are not used. -->
+  <section class="stat-strip" aria-label="Food waste in numbers">
+    <div class="container-xl stat-grid">
+      <div class="stat">
+        <span class="num font-data">~1/3</span>
+        <span class="label">Of food produced for people is lost or wasted worldwide</span>
+        <span class="source"><a href="https://www.fao.org/3/mb060e/mb060e00.htm" target="_blank" rel="noopener noreferrer">Source: FAO, 2011<span class="visually-hidden"> (opens in a new tab)</span></a></span>
+      </div>
+      <div class="stat">
+        <span class="num font-data">~25%</span>
+        <span class="label">Of the food and drinks US households buy ends up thrown out</span>
+        <span class="source"><a href="https://www.nrdc.org/sites/default/files/wasted-food-IP.pdf" target="_blank" rel="noopener noreferrer">Source: NRDC, 2012<span class="visually-hidden"> (opens in a new tab)</span></a></span>
+      </div>
+      <div class="stat">
+        <span class="num font-data">$1,365–$2,275</span>
+        <span class="label">Estimated yearly cost of that waste for a US family of four</span>
+        <span class="source"><a href="https://www.nrdc.org/sites/default/files/wasted-food-IP.pdf" target="_blank" rel="noopener noreferrer">Source: NRDC, 2012 estimate<span class="visually-hidden"> (opens in a new tab)</span></a></span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" style="padding-top:0;">
-  <div class="container-xl">
-    <div class="newsletter">
-      <h2 style="font-size:1.5rem; margin:0;">Get one useful email a week</h2>
-      <p style="max-width:420px; margin:8px auto 0;">New guides, real numbers, no fluff.</p>
-      <form>
-        <label for="email" class="visually-hidden">Email address</label>
-        <input type="email" id="email" placeholder="you@email.com" required>
-        <button type="submit" class="btn btn-primary">Subscribe</button>
-      </form>
-      <small>No spam. Unsubscribe anytime.</small>
+  <section class="section" aria-labelledby="path-title">
+    <div class="container-xl">
+      <div class="section-head">
+        <p class="kicker">Start Here</p>
+        <h2 id="path-title">Read in this order</h2>
+        <p>Eight guides, built to answer one question at a time — from why food waste costs you more than you think, to whether a freeze dryer is worth the money.</p>
+      </div>
+
+      <ol class="path-list">
+        <li><a href="why-food-preservation-is-necessary.html" class="path-card">
+          <span class="path-step step-1" aria-hidden="true">1</span>
+          <div class="path-text"><h3>Why Food Preservation Is Necessary</h3><p>What food waste actually costs the average household each year.</p></div>
+          <svg class="icon arrow" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg>
+        </a></li>
+        <li><a href="food-storage-methods-compared.html" class="path-card">
+          <span class="path-step step-2" aria-hidden="true">2</span>
+          <div class="path-text"><h3>Food Storage Methods Compared</h3><p>Canning, freezing, dehydrating, and freeze drying, side by side.</p></div>
+          <svg class="icon arrow" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg>
+        </a></li>
+        <li><a href="what-is-freeze-drying.html" class="path-card">
+          <span class="path-step step-3" aria-hidden="true">3</span>
+          <div class="path-text"><h3>What Is Freeze Drying?</h3><p>The science of sublimation, explained without the jargon.</p></div>
+          <svg class="icon arrow" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg>
+        </a></li>
+        <li><a href="history-of-freeze-drying.html" class="path-card">
+          <span class="path-step step-4" aria-hidden="true">4</span>
+          <div class="path-text"><h3>A Brief History of Freeze Drying</h3><p>From the Andes to NASA — how the process was discovered and refined.</p></div>
+          <svg class="icon arrow" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg>
+        </a></li>
+        <li><a href="food-storage-mistakes.html" class="path-card">
+          <span class="path-step step-5" aria-hidden="true">5</span>
+          <div class="path-text"><h3>Seven Common Food Storage Mistakes</h3><p>The small errors that quietly spoil food faster than they should.</p></div>
+          <svg class="icon arrow" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg>
+        </a></li>
+        <li><a href="is-a-freeze-dryer-worth-it.html" class="path-card">
+          <span class="path-step step-6" aria-hidden="true">6</span>
+          <div class="path-text"><h3>Is a Freeze Dryer Worth It?</h3><p>Weighing the upfront cost against what you'd actually save.</p></div>
+          <svg class="icon arrow" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg>
+        </a></li>
+        <li><a href="freeze-dryer-payback-calculator.html" class="path-card">
+          <span class="path-step step-7" aria-hidden="true">7</span>
+          <div class="path-text"><h3>How Long Until It Pays for Itself?</h3><p>A real payback calculation based on your household's habits.</p></div>
+          <svg class="icon arrow" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg>
+        </a></li>
+        <li><a href="best-home-freeze-dryers.html" class="path-card">
+          <span class="path-step step-8" aria-hidden="true">8</span>
+          <div class="path-text"><h3>Best Freeze Dryers for Home Use</h3><p>Specific models compared, once you've decided it's worth it.</p></div>
+          <svg class="icon arrow" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg>
+        </a></li>
+      </ol>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="section pt-0" aria-labelledby="how-title">
+    <div class="container-xl">
+      <div class="section-head">
+        <p class="kicker">How This Guide Works</p>
+        <h2 id="how-title">Research-based, not lab-tested</h2>
+        <p>We don't yet own a home freeze dryer ourselves. Every guide here is built from manufacturer data, published research, and aggregated experience from long-time home users. Where a claim comes from someone's hands-on use rather than our own, we say so.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-journal-check"></use></svg>
+          <h3>Sourced, not guessed</h3>
+          <p>Shelf-life and nutrition figures are drawn from published data, not marketing copy.</p>
+        </div>
+        <div class="trust-card">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-people"></use></svg>
+          <h3>Owner experience, credited</h3>
+          <p>Real-use details come from home-user communities and are attributed, not passed off as our own.</p>
+        </div>
+        <div class="trust-card">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-cash-coin"></use></svg>
+          <h3>Honest about incentives</h3>
+          <p>Some links on this site are affiliate links. <a href="affiliate-disclosure.html">Read our full disclosure</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pt-0" aria-labelledby="pillar-title">
+    <div class="container-xl">
+      <div class="pillar">
+        <p class="kicker">The Pillar Guide</p>
+        <h2 id="pillar-title">What is freeze drying, really?</h2>
+        <p>The one guide that explains the whole process, and the hub every other article on this site links back to.</p>
+        <a href="what-is-freeze-drying.html" class="btn btn-primary">Read the Full Guide <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#i-arrow-right"></use></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter: plain HTML form posting straight to Kit (form 10089591).
+       No Kit script is loaded: no third-party JS, no Kit cookies, CSP stays strict. -->
+  <section class="section pt-0" aria-labelledby="newsletter-title">
+    <div class="container-xl">
+      <div class="newsletter">
+        <h2 id="newsletter-title">Get one useful email a week</h2>
+        <p>New guides, real numbers, no fluff.</p>
+        <form class="subscribe-form" action="https://app.kit.com/forms/10089591/subscriptions" method="post">
+          <div class="subscribe-row">
+            <label for="nl-email" class="subscribe-label">Email address</label>
+            <input type="email" id="nl-email" name="email_address" required autocomplete="email" inputmode="email" maxlength="254" aria-describedby="nl-consent">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </div>
+          <p id="nl-consent" class="subscribe-consent">You'll get a confirmation email first — nothing is sent until you confirm. No spam. Unsubscribe anytime. See our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
   <div class="container-xl">
     <div class="footer-grid">
       <a href="index.html" class="brand">
-        <img src="images/logo.svg" alt="Preserve Smarter" class="logo-img">
-        <span class="logo-text">
-          <span class="preserve">Preserve</span>
-          <span class="smarter">Smarter</span>
-        </span>
+        <img src="images/logo.svg" class="logo-img logo-light" alt="" width="34" height="34" loading="lazy" decoding="async">
+        <img src="images/logo-dark.svg" class="logo-img logo-dark" alt="" width="34" height="34" loading="lazy" decoding="async">
+        <span class="logo-text"><span class="preserve">Preserve</span> <span class="smarter">Smarter</span></span>
       </a>
       <div class="footer-cols">
-        <div>
-          <h4>Guides</h4>
+        <nav aria-label="Guides">
+          <p class="footer-heading">Guides</p>
           <ul>
-            <li><a href="01-why-food-preservation-is-necessary.html">Why Preserve</a></li>
-            <li><a href="02-food-storage-methods-compared.html">Compare Methods</a></li>
-            <li><a href="03-what-is-freeze-drying.html">Freeze Drying</a></li>
-            <li><a href="00-brief-history-of-freeze-drying.html">History</a></li>
+            <li><a href="why-food-preservation-is-necessary.html">Why Preserve</a></li>
+            <li><a href="food-storage-methods-compared.html">Compare Methods</a></li>
+            <li><a href="what-is-freeze-drying.html">Freeze Drying</a></li>
+            <li><a href="history-of-freeze-drying.html">History</a></li>
           </ul>
-        </div>
-        <div>
-          <h4>Buying</h4>
+        </nav>
+        <nav aria-label="Buying">
+          <p class="footer-heading">Buying</p>
           <ul>
-            <li><a href="04-is-a-freeze-dryer-worth-it.html">Is It Worth It?</a></li>
-            <li><a href="07-how-long-does-it-take-for-a-freeze-dryer-to-pay-for-itself.html">Payback Calculator</a></li>
-            <li><a href="05-best-freeze-dryers-for-home-use.html">Best Dryers</a></li>
-            <li><a href="06-seven-common-food-storage-mistakes.html">Common Mistakes</a></li>
+            <li><a href="is-a-freeze-dryer-worth-it.html">Is It Worth It?</a></li>
+            <li><a href="freeze-dryer-payback-calculator.html">Payback Calculator</a></li>
+            <li><a href="best-home-freeze-dryers.html">Best Dryers</a></li>
+            <li><a href="food-storage-mistakes.html">Common Mistakes</a></li>
           </ul>
-        </div>
+        </nav>
+        <nav aria-label="About">
+          <p class="footer-heading">About</p>
+          <ul>
+            <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          </ul>
+        </nav>
       </div>
     </div>
     <p class="disclosure">
       <strong>Affiliate Disclosure:</strong> Preserve Smarter may earn a commission from qualifying purchases made through links on this site, at no extra cost to you. This never affects which products we recommend or how we describe them.
     </p>
-    <p class="copyright">&copy; <span id="year"></span> Preserve Smarter. All rights reserved.</p>
+    <p class="copyright">&copy; <span id="year">2026</span> Preserve Smarter. All rights reserved.</p>
   </div>
 </footer>
 
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="js/main.js"></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
