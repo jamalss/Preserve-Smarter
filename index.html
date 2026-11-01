@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- 3. Content Security Policy — strict: no inline scripts or styles anywhere on this site.
      form-action allows only Kit's subscribe endpoint. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action https://app.kit.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self' https://app.kit.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
 <!-- 4–6. Kept per build standard. NOTE: browsers only honour X-Content-Type-Options and
      Permissions-Policy as real HTTP headers — these meta versions are ignored. The working
      versions come from the Cloudflare Transform Rule (security.txt Section 11, step 10). -->
